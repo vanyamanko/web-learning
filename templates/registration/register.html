@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Register" %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'auth_styles.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .flatpickr-calendar {
+            z-index: 1000;
+        }
+        .flatpickr-current-month {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flatpickr-current-month .cur-year {
+            font-size: 1.25em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{% trans "Register" %}</h2>
+        <form method="post" id="register-form">
+            {% csrf_token %}
+            <label for="{{ form.username.id_for_label }}">{% trans "Username" %}:</label>
+            {{ form.username }}
+
+            <label for="{{ form.first_name.id_for_label }}">{% trans "First Name" %}:</label>
+            {{ form.first_name }}
+
+            <label for="{{ form.last_name.id_for_label }}">{% trans "Last Name" %}:</label>
+            {{ form.last_name }}
+
+            <label for="{{ form.birth_date.id_for_label }}">{% trans "Birth Date" %}:</label>
+            <div class="mb-10">
+                <input type="text" class="form-control" placeholder="{% trans 'Pick a date' %}" id="id_birth_date" name="birth_date" required/>
+            </div>
+
+            <label for="{{ form.gender.id_for_label }}">{% trans "Gender" %}:</label>
+            <select id="id_gender" name="gender" required>
+                <option value="male">{% trans "Male" %}</option>
+                <option value="female">{% trans "Female" %}</option>
+            </select>
+
+            <label for="{{ form.email.id_for_label }}">{% trans "Email" %}:</label>
+            {{ form.email }}
+
+            <label for="{{ form.country.id_for_label }}">{% trans "Country" %}:</label>
+            <select id="id_country" name="country" required>
+                <!-- Africa -->
+                <option value="Algeria">{% trans "Algeria" %}</option>
+                <option value="Angola">{% trans "Angola" %}</option>
+                <option value="Benin">{% trans "Benin" %}</option>
+                <option value="Botswana">{% trans "Botswana" %}</option>
+                <option value="Burkina Faso">{% trans "Burkina Faso" %}</option>
+                <option value="Burundi">{% trans "Burundi" %}</option>
+                <option value="Cabo Verde">{% trans "Cabo Verde" %}</option>
+                <option value="Cameroon">{% trans "Cameroon" %}</option>
+                <option value="Central African Republic">{% trans "Central African Republic" %}</option>
+                <option value="Chad">{% trans "Chad" %}</option>
+                <option value="Comoros">{% trans "Comoros" %}</option>
+                <option value="Congo, Democratic Republic of the">{% trans "Congo, Democratic Republic of the" %}</option>
+                <option value="Congo, Republic of the">{% trans "Congo, Republic of the" %}</option>
+                <option value="Djibouti">{% trans "Djibouti" %}</option>
+                <option value="Egypt">{% trans "Egypt" %}</option>
+                <option value="Equatorial Guinea">{% trans "Equatorial Guinea" %}</option>
+                <option value="Eritrea">{% trans "Eritrea" %}</option>
+                <option value="Eswatini">{% trans "Eswatini" %}</option>
+                <option value="Ethiopia">{% trans "Ethiopia" %}</option>
+                <option value="Gabon">{% trans "Gabon" %}</option>
+                <option value="Gambia">{% trans "Gambia" %}</option>
+                <option value="Ghana">{% trans "Ghana" %}</option>
+                <option value="Guinea">{% trans "Guinea" %}</option>
+                <option value="Guinea-Bissau">{% trans "Guinea-Bissau" %}</option>
+                <option value="Ivory Coast">{% trans "Ivory Coast" %}</option>
+                <option value="Kenya">{% trans "Kenya" %}</option>
+                <option value="Lesotho">{% trans "Lesotho" %}</option>
+                <option value="Liberia">{% trans "Liberia" %}</option>
+                <option value="Libya">{% trans "Libya" %}</option>
+                <option value="Madagascar">{% trans "Madagascar" %}</option>
+                <option value="Malawi">{% trans "Malawi" %}</option>
+                <option value="Mali">{% trans "Mali" %}</option>
+                <option value="Mauritania">{% trans "Mauritania" %}</option>
+                <option value="Mauritius">{% trans "Mauritius" %}</option>
+                <option value="Morocco">{% trans "Morocco" %}</option>
+                <option value="Mozambique">{% trans "Mozambique" %}</option>
+                <option value="Namibia">{% trans "Namibia" %}</option>
+                <option value="Niger">{% trans "Niger" %}</option>
+                <option value="Nigeria">{% trans "Nigeria" %}</option>
+                <option value="Rwanda">{% trans "Rwanda" %}</option>
+                <option value="Sao Tome and Principe">{% trans "São Tomé and Príncipe" %}</option>
+                <option value="Senegal">{% trans "Senegal" %}</option>
+                <option value="Seychelles">{% trans "Seychelles" %}</option>
+                <option value="Sierra Leone">{% trans "Sierra Leone" %}</option>
+                <option value="Somalia">{% trans "Somalia" %}</option>
+                <option value="South Africa">{% trans "South Africa" %}</option>
+                <option value="South Sudan">{% trans "South Sudan" %}</option>
+                <option value="Sudan">{% trans "Sudan" %}</option>
+                <option value="Tanzania">{% trans "Tanzania" %}</option>
+                <option value="Togo">{% trans "Togo" %}</option>
+                <option value="Tunisia">{% trans "Tunisia" %}</option>
+                <option value="Uganda">{% trans "Uganda" %}</option>
+                <option value="Zambia">{% trans "Zambia" %}</option>
+                <option value="Zimbabwe">{% trans "Zimbabwe" %}</option>
+            </select>
+
+            <label for="{{ form.russian_language_level.id_for_label }}">{% trans "Russian Language Level" %}:</label>
+            <select id="id_russian_language_level_level" name="russian_language_level" required>
+                <option value="low">{% trans "Low" %}</option>
+                <option value="medium">{% trans "Medium" %}</option>
+                <option value="high">{% trans "High" %}</option>
+            </select>
+
+            <label for="{{ form.password1.id_for_label }}">{% trans "Password" %}:</label>
+            {{ form.password1 }}
+
+            <label for="{{ form.password2.id_for_label }}">{% trans "Confirm Password" %}:</label>
+            {{ form.password2 }}
+
+            <button type="submit">{% trans "Register" %}</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr("#id_birth_date", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "F j, Y",
+                locale: "{{ LANGUAGE_CODE }}",
+                yearSelectorType: "dropdown"
+            });
+        });
+    </script>
+</body>
+</html>

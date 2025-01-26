@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #25274D;
+}
+
+header {
+    background-color: #2E9CCA;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+header a {
+    display: inline-block;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 15px 20px;
+    background-color: #2E9CCA;
+    border-radius: 5px;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+}
+
+header a:hover {
+    color: #fff;
+    background-color: #2E9CCA;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2E9CCA;
+    font-size: 28px;
+    margin-top: 0;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #464866;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+a {
+    color: #2E9CCA;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #29648A;
+}
+
+.back-link,
+.btn,
+.main-link,
+.full-width-btn,
+.enroll-btn,
+.nav-link,
+.add-lesson-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2E9CCA;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.back-link:hover,
+.btn:hover,
+.main-link:hover,
+.full-width-btn:hover,
+.enroll-btn:hover,
+.nav-link:hover,
+.add-lesson-btn:hover {
+    background-color: #29648A;
+}
+
+.enrollment-status {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.enrollment-status.enrolled {
+    color: #28a745;
+}
+
+.enrollment-status.not-enrolled {
+    color: #dc3545;
+}
+
+.full-width-btn-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button-container a {
+    flex: 1 1 auto;
+    margin: 5px 0;
+    padding: 12px 25px;
+    background-color: #2E9CCA;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-container a:hover {
+    color: #fff;
+    background-color: #2E9CCA;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.btn-container .btn {
+    margin: 0 auto;
+}
+
+.container .btn-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+}
+
+.container .btn-container .btn {
+    margin: 0;
+}

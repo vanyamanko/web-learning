@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll in Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #25274D;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2E9CCA;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #29648A;
+        }
+
+        header {
+            background-color: #2E9CCA;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+        }
+
+        header a {
+            display: inline-block;
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            padding: 15px 20px;
+            background-color: #2E9CCA;
+            border-radius: 5px;
+            width: calc(100% - 40px); /* Full width minus padding */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        header a:hover {
+            color: #fff; /* Keep the text color white on hover */
+            background-color: #2E9CCA; /* Keep the background color the same */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2E9CCA;
+            font-size: 32px;
+            margin-top: 0;
+        }
+
+        p {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #495057;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2E9CCA;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background-color: #29648A;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Gap for spacing between buttons */
+            flex-wrap: wrap;
+        }
+
+        .enroll-btn {
+            margin-right: 20px; /* Adjust as necessary */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <h1>Are you sure you want to enroll in the course "{{ course.name }}"?</h1>
+        <p>After clicking "Enroll", you will be added to the course participants list.</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="enroll-btn btn">Enroll in Course</button>
+        </form>
+        <div class="button-container">
+            <a href="{% url 'course_detail' course_id=course.id %}" class="back-link btn">Back to Course Page</a>
+        </div>
+    </div>
+</body>
+</html>

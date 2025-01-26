@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tests</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'test_styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <h1>All Tests</h1>
+        <ul>
+            {% for test in tests %}
+                <li>
+                    {{ test.lesson.course.name }}: <a href="{% url 'lesson_detail' course_id=test.lesson.course.id lesson_id=test.lesson.id %}">{{ test.lesson.title }}</a>
+                    <span>Score: {{ test.score }}%</span>
+                    {% if test.passed %}
+                        <span class="completed">Passed</span>
+                    {% else %}
+                        <span class="not-completed">Not Passed</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="button-container">
+            <a href="{% url 'courses_list' %}" class="back-link">Back to Courses</a>
+        </div>
+    </div>
+</body>
+</html>

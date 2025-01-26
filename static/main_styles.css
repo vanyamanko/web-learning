@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #25274D;
+}
+
+a {
+    text-decoration: none;
+    color: #2E9CCA;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #29648A;
+}
+
+header {
+    background-color: #2E9CCA;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+}
+
+header a {
+    display: inline-block;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 15px 20px;
+    background-color: #2E9CCA;
+    border-radius: 5px;
+    width: calc(100% - 40px); /* Full width minus padding */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+header a:hover {
+    color: #fff; /* Keep the text color white on hover */
+    background-color: #2E9CCA; /* Keep the background color the same */
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #2E9CCA;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.profile-icon {
+    display: inline-block;
+    background-color: #29648A;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.profile-icon:hover {
+    background-color: #25274D;
+}
+
+.welcome-msg {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+h1 {
+    color: #2E9CCA;
+    font-size: 42px;
+    margin-bottom: 40px;
+}
+
+.block {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+h2 {
+    color: #2E9CCA;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #464866;
+    font-size: 18px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #2E9CCA;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.btn:last-child {
+    margin-right: 0;
+}
+
+.btn:hover {
+    background-color: #29648A;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button-container a {
+    flex: 1 1 auto;
+    margin: 5px 0;
+    padding: 12px 25px;
+    background-color: #2E9CCA;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.button-container a:hover {
+    color: #fff; /* Keep the text color white on hover */
+    background-color: #2E9CCA; /* Keep the background color the same */
+}
+
+.language-selector {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    color: #25274D;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.language-selector select.language-select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.language-selector input[type="submit"].language-submit {
+    padding: 8px 16px;
+    background-color: #2E9CCA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.language-selector input[type="submit"].language-submit:hover {
+    background-color: #29648A;
+}

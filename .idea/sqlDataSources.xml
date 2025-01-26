@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="7e791c08-559f-4e74-8e2e-7b5e3453f0d3" name="webLearning@localhost Mapping">
+      <data-sources db="b731b73f-68c0-4c5d-ba8b-8a154a025424" />
+      <scope>
+        <node kind="database" negative="1" />
+      </scope>
+    </mapping>
+    <mapping uuid="2e535d41-fcaa-4ec1-8f75-74dc6bad59bb" name="webLearning@localhost Mapping [2]">
+      <data-sources db="78fa45f9-1e63-4d80-985d-70a613b21945" />
+    </mapping>
+  </component>
+</project>

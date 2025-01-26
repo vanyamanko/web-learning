@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lesson.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lesson_styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <h1 class="course-title">{{ course.name }}</h1>
+        <h1>{{ lesson.title }}</h1>
+        <div>{{ content|safe }}</div>
+
+        <div class="nav-links">
+            {% if prev_lesson %}
+                <a href="{% url 'lesson_detail' course_id=course.id lesson_id=prev_lesson.id %}" class="nav-link">&#9664; Previous Lesson</a>
+            {% endif %}
+            {% if next_lesson %}
+                <a href="{% url 'lesson_detail' course_id=course.id lesson_id=next_lesson.id %}" class="nav-link">Next Lesson &#9654;</a>
+            {% else %}
+                <a href="{% url 'lesson_test' course_id=course.id lesson_id=lesson.id %}" class="nav-link">Take Test</a>
+            {% endif %}
+        </div>
+
+        <div class="button-container">
+            <a href="{% url 'course_detail' course_id=course.id %}" class="back-link">Back to Course</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'profile_styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+       .crop-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: auto;
+        }
+        .crop-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+        .flatpickr-calendar {
+            z-index: 1000; /* Ensure calendar displays above other elements */
+        }
+        .flatpickr-current-month {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flatpickr-current-month .cur-year {
+            font-size: 1.25em;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Profile</h1>
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="id_bio">Bio:</label>
+                <textarea name="bio" id="id_bio" rows="4">{{ form.bio.value }}</textarea>
+
+                <label for="id_date_of_birth_display">Date of Birth:</label>
+                <div>
+                    <input type="text" id="id_date_of_birth_display" value="{{ form.date_of_birth.value }}" readonly>
+                    <button type="button" onclick="showDatePicker()">Edit</button>
+                </div>
+                <input type="text" name="date_of_birth" id="id_date_of_birth" value="{{ form.date_of_birth.value }}" style="display:none;">
+
+                <div class="current-image">
+                    {% if profile.profile_picture %}
+                    <div class="image-container">
+                        <img src="../media/{{ profile.profile_picture }}" alt="Profile Picture" style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                    {% else %}
+                    <p>No current profile picture</p>
+                    {% endif %}
+                </div>
+
+                <label for="id_profile_picture">Upload Profile Picture:</label>
+                <input type="file" name="profile_picture" id="id_profile_picture" accept="image/*" class="upload-btn" onchange="loadFile(event)">
+
+                <div id="crop-area" class="crop-container" style="display: none;">
+                    <img id="crop-image" src="#" alt="Crop Image">
+                </div>
+                <button type="button" id="apply-button" style="display:none;" onclick="applyCrop()">Apply</button>
+
+                <label for="id_phone_number">Phone Number:</label>
+                <input type="text" name="phone_number" id="id_phone_number" value="{{ form.phone_number.value }}">
+
+                <label for="id_country">Country:</label>
+                <select id="id_country" name="country">
+                    <option value="Algeria">Algeria</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Benin">Benin</option>
+                    <option value="Botswana">Botswana</option>
+                    <option value="Burkina Faso">Burkina Faso</option>
+                    <option value="Burundi">Burundi</option>
+                    <option value="Cabo Verde">Cabo Verde</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Central African Republic">Central African Republic</option>
+                    <option value="Chad">Chad</option>
+                    <option value="Comoros">Comoros</option>
+                    <option value="Congo, Democratic Republic of the">Congo, Democratic Republic of the</option>
+                    <option value="Congo, Republic of the">Congo, Republic of the</option>
+                    <option value="Djibouti">Djibouti</option>
+                    <option value="Egypt">Egypt</option>
+                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                    <option value="Eritrea">Eritrea</option>
+                    <option value="Eswatini">Eswatini</option>
+                    <option value="Ethiopia">Ethiopia</option>
+                    <option value="Gabon">Gabon</option>
+                    <option value="Gambia">Gambia</option>
+                    <option value="Ghana">Ghana</option>
+                    <option value="Guinea">Guinea</option>
+                    <option value="Guinea-Bissau">Guinea-Bissau</option>
+                    <option value="Ivory Coast">Ivory Coast</option>
+                    <option value="Kenya">Kenya</option>
+                    <option value="Lesotho">Lesotho</option>
+                    <option value="Liberia">Liberia</option>
+                    <option value="Libya">Libya</option>
+                    <option value="Madagascar">Madagascar</option>
+                    <option value="Malawi">Malawi</option>
+                    <option value="Mali">Mali</option>
+                    <option value="Mauritania">Mauritania</option>
+                    <option value="Mauritius">Mauritius</option>
+                    <option value="Morocco">Morocco</option>
+                    <option value="Mozambique">Mozambique</option>
+                    <option value="Namibia">Namibia</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Rwanda">Rwanda</option>
+                    <option value="Sao Tome and Principe">São Tomé and Príncipe</option>
+                    <option value="Senegal">Senegal</option>
+                    <option value="Seychelles">Seychelles</option>
+                    <option value="Sierra Leone">Sierra Leone</option>
+                    <option value="Somalia">Somalia</option>
+                    <option value="South Africa">South Africa</option>
+                    <option value="South Sudan">South Sudan</option>
+                    <option value="Sudan">Sudan</option>
+                    <option value="Tanzania">Tanzania</option>
+                    <option value="Togo">Togo</option>
+                    <option value="Tunisia">Tunisia</option>
+                    <option value="Uganda">Uganda</option>
+                    <option value="Zambia">Zambia</option>
+                    <option value="Zimbabwe">Zimbabwe</option>
+                </select>
+
+                <button type="submit" class="btn">Save</button>
+            </form>
+            <a href="{% url 'profiles:view_profile' %}" class="btn">View Profile</a>
+            <a href="/" class="btn">Back to Main Menu</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        var cropper;
+
+        function loadFile(event) {
+            var image = document.getElementById('crop-image');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById('crop-area').style.display = 'block';
+            document.getElementById('apply-button').style.display = 'inline';
+
+            image.onload = function() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    ready: function() {
+                        var cropBoxData = cropper.getCropBoxData();
+                        var containerData = cropper.getContainerData();
+                        cropBoxData.left = (containerData.width - cropBoxData.width) / 2;
+                        cropBoxData.top = (containerData.height - cropBoxData.height) / 2;
+                        cropper.setCropBoxData(cropBoxData);
+                    }
+                });
+            };
+        }
+
+        function applyCrop() {
+            var canvas = cropper.getCroppedCanvas({
+                width: 300,
+                height: 300
+            });
+            canvas.toBlob(function(blob) {
+                var file = new File([blob], 'profile_picture.png', { type: 'image/png' });
+                var dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                document.getElementById('id_profile_picture').files = dataTransfer.files;
+                document.getElementById('apply-button').style.display = 'none';
+                document.querySelector('form').submit();
+            });
+        }
+
+        function showDatePicker() {
+            document.getElementById('id_date_of_birth').style.display = 'block';
+            flatpickr("#id_date_of_birth", {
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "F j, Y",
+                locale: "en",
+                static: true,
+                yearSelectorType: "dropdown"  // Use a dropdown for year selection
+            });
+            document.getElementById('id_date_of_birth').focus();
+        };
+
+        document.getElementById('id_date_of_birth').addEventListener('change', function() {
+            var dateOfBirth = document.getElementById('id_date_of_birth').value;
+            document.getElementById('id_date_of_birth_display').value = dateOfBirth;
+            document.getElementById('id_date_of_birth').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!-- lesson_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons for Course: {{ course.name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lesson_styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <h1>Lessons for Course: {{ course.name }}</h1>
+        <ul>
+            {% for lesson in lessons %}
+                <li><a href="{% url 'lesson_detail' course_id=course.id lesson_id=lesson.id %}" class="lesson-link">{{ lesson.title }}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <a href="{% url 'course_detail' course_id=course.id %}" class="back-link">Back to Course</a>
+            {% if request.user.is_authenticated and request.user.is_superuser %}
+            <a href="{% url 'add_lesson' course_id=course.id %}" class="add-lesson-btn">Add Lesson</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

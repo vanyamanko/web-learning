@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Lesson</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lesson_styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+    </header>
+    <div class="container">
+        <h1>Add Lesson</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">Add Lesson</button>
+        </form>
+        <div class="button-container">
+            <a href="{% url 'course_detail' course_id=course.id %}" class="back-link">Cancel</a>
+        </div>
+    </div>
+</body>
+</html>
