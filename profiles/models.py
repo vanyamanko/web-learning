@@ -4,6 +4,8 @@ from django.conf import settings
 from users.models import CustomUser  # Импортируем вашу кастомную модель пользователя
 from django.conf import settings
 from django.db import models
+
+
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)  # Изменяем связь на вашу кастомную модель пользователя
     bio = models.TextField(blank=True)

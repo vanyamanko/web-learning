@@ -6,6 +6,8 @@ from .models import Profile
 from courses.models import Enrollment, CompletedLesson, TestResult
 from django.utils.dateparse import parse_datetime
 import json
+
+
 @login_required
 def view_profile(request):
     profile = Profile.objects.get(user=request.user)
@@ -37,6 +39,8 @@ def view_profile(request):
         'lesson_titles': json.dumps(lesson_titles),
     }
     return render(request, 'view_profile.html', context)
+
+
 
 @login_required
 def edit_profile(request):
