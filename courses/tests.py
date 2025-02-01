@@ -91,13 +91,16 @@ def profile_statistics(request):
     for user in users:
         total_courses = Enrollment.objects.filter(user=user).count()
         total_lessons = TestResult.objects.filter(user=user, score__gte=70).count()
-        average_score = TestResult.objects.filter(user=user).aggregate(average_score=json.dumps(sum(TestResult.objects.filter(user=user).values_list('score', flat=True)) / total_lessons if total_lessons else 0))
+
+        average_score = TestResult.objects.filter(user=user).aggregate(avg_score=Avg('score'))['avg_score']
+        average_score = round(average_score, 2) if average_score is not None else 0
 
         statistics.append({
             'username': user.username,
             'total_courses': total_courses,
             'total_lessons': total_lessons,
-            'average_score': average_score['average_score'],
+            'average_score': average_score,
         })
 
     return render(request, 'profile_statistics.html', {'statistics': statistics})
+
