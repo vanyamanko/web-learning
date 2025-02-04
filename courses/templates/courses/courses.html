@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Courses List</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'course_styles.css' %}">
-</head>
-<body>
+    <link rel="stylesheet" href="{% static 'course_styles.css' %}" />
+  </head>
+  <body>
     <header>
-        <a href="/">Home</a>
+      <a href="/">Home</a>
     </header>
     <div class="container">
-        <h1>Courses List</h1>
+      <h1>Courses List</h1>
 
-        <ul>
-            {% for course in courses %}
-            <li>
-                <h2>{{ course.name }}</h2>
-                <p><strong>Description:</strong> {{ course.description }}</p>
-                <p><strong>Difficulty Level:</strong> {{ course.difficulty_level }}</p>
-                <p><strong>Duration:</strong> {{ course.duration }} days</p>
-                <p><strong>Topic:</strong> {{ course.topic }}</p>
-                <a href="{% url 'course_detail' course_id=course.id %}" class="btn">Details</a>
-                <p class="enrollment-status {% if course.id in enrollments %}enrolled{% else %}not-enrolled{% endif %}">
-                    Enrollment Status: {% if course.id in enrollments %}Enrolled{% else %}Not Enrolled{% endif %}
-                </p>
-                {% if course.id in enrollments %}
-                    <a href="{% url 'lesson_list' course_id=course.id %}" class="btn">Lessons</a>
-                {% else %}
-                    <a href="{% url 'enroll_course' course_id=course.id %}" class="btn">Enroll in Course</a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+      <ul>
+        {% for course in courses %}
+        <li>
+          <h2>{{ course.name }}</h2>
+          <p><strong>Description:</strong> {{ course.description }}</p>
+          <p>
+            <strong>Difficulty Level:</strong> {{ course.difficulty_level }}
+          </p>
+          <p><strong>Duration:</strong> {{ course.duration }} days</p>
+          <p><strong>Topic:</strong> {{ course.topic }}</p>
+          <a href="{% url 'course_detail' course_id=course.id %}" class="btn"
+            >Details</a
+          >
+          <p
+            class="enrollment-status {% if course.id in enrollments %}enrolled{% else %}not-enrolled{% endif %}"></p>
+          {% if course.id in enrollments %} {% else %}
+          <a href="{% url 'enroll_course' course_id=course.id %}" class="btn"
+            >Enroll in Course</a
+          >
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
     </div>
-</body>
+  </body>
 </html>
