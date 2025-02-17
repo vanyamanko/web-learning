@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'profile_styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>View Profile</h1>
+        <div class="profile-picture">
+            <img src="./media/{{ profile.profile_picture }}" alt="Profile Picture">
+        </div>
+        <div class="profile-info">
+            <p><label>Username:</label> {{ profile.user.username }}</p>
+            <p><label>Bio:</label> {{ profile.bio }}</p>
+            <p><label>Date of Birth:</label> {{ profile.date_of_birth }}</p>
+            <p><label>Phone Number:</label> {{ profile.phone_number }}</p>
+            <p><label>Country:</label> {{ profile.country }}</p>
+            <p><label>Enrolled Courses:</label></p>
+            <ul>
+                {% for enrollment in profile.user.course_enrollments.all %}
+                <li>{{ enrollment.course.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="statistics">
+            <h2>Statistics</h2>
+            <p>Total Courses Enrolled: {{ total_courses }}</p>
+            <p>Total Lessons Completed: {{ total_lessons }}</p>
+            <div id="chart-container">
+                <canvas id="courseChart"></canvas>
+            </div>
+            <div id="chart-container">
+                <canvas id="lessonCompletionPieChart"></canvas>
+            </div>
+            <div id="chart-container">
+                <canvas id="lessonCompletionTimeline"></canvas>
+            </div>
+        </div>
+        <a href="{% url 'profiles:edit_profile' %}" class="btn">Edit Profile</a>
+        <a href="/" class="btn">Back to Main Menu</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('courseChart').getContext('2d');
+        var courseChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ course_names|safe }},
+                datasets: [{
+                    label: 'Lessons Completed',
+                    data: {{ lessons_completed|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    hoverBackgroundColor: 'rgba(54, 162, 235, 0.75)',
+                    hoverBorderColor: 'rgba(54, 162, 235, 1)',
+                    hoverBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Courses',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#25274D'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Lessons Completed',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#25274D'
+                        }
+                    }
+                }
+            }
+        });
+
+        var ctxPie = document.getElementById('lessonCompletionPieChart').getContext('2d');
+        var lessonCompletionPieChart = new Chart(ctxPie, {
+            type: 'pie',
+            data: {
+                labels: {{ course_names|safe }},
+                datasets: [{
+                    data: {{ lessons_completed|safe }},
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(255, 206, 86, 0.5)',
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(153, 102, 255, 0.5)',
+                        'rgba(255, 159, 64, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        });
+
+        var ctxLine = document.getElementById('lessonCompletionTimeline').getContext('2d');
+        var lessonCompletionTimeline = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: {{ completed_tests_dates|safe }},
+                datasets: [{
+                    label: 'Lessons Completed Over Time',
+                    data: {{ test_scores|safe }},
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                    tension: 0.4,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(75, 192, 192, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleFont: {
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        bodyFont: {
+                            size: 14
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            unit: 'day'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#25274D'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Scores',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            color: '#25274D'
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#25274D'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
