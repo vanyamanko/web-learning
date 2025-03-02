@@ -1,74 +1,130 @@
+:root {
+  --primary-color: #ff6347;
+  --hover-color: #e5533d;
+  --bg-color: #fffafa;
+  --text-color: #25274d;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --border-radius: 10px;
+  --transition-speed: 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    color: #25274D;
-}
-
-header {
-    background-color: #2E9CCA;
-    padding: 10px 0;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-}
-
-header a {
-    display: inline-block;
-    color: #fff;
-    font-size: 20px;
-    text-decoration: none;
-    padding: 15px 20px;
-    background-color: #2E9CCA;
-    border-radius: 5px;
-    width: calc(100% - 40px);
-    box-sizing: border-box;
-}
-
-header a:hover {
-    color: #fff;
-    background-color: #2E9CCA;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #2E9CCA;
-    font-size: 28px;
-    margin-top: 0;
-}
-
-p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #464866;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    margin: 10px 0;
-    font-size: 18px;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  animation: fadeIn 0.5s ease-out;
 }
 
 a {
-    color: #2E9CCA;
-    text-decoration: none;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: color var(--transition-speed);
 }
 
 a:hover {
-    color: #29648A;
+  color: var(--hover-color);
+  animation: bounce 0.5s ease;
+}
+
+header {
+  background-color: var(--primary-color);
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  animation: slideIn 0.5s ease-out;
+}
+
+header a {
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 15px 20px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+  transition: background-color var(--transition-speed);
+}
+
+header a:hover {
+  color: #fff;
+  background-color: var(--hover-color);
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-top: 0;
+  animation: slideIn 0.5s ease-out;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: var(--text-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 18px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .back-link,
@@ -78,15 +134,17 @@ a:hover {
 .enroll-btn,
 .nav-link,
 .add-lesson-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #2E9CCA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-right: 10px;
-    text-align: center;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color var(--transition-speed), transform 0.2s;
+  margin-right: 10px;
+  text-align: center;
+  font-size: 1rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .back-link:hover,
@@ -96,67 +154,75 @@ a:hover {
 .enroll-btn:hover,
 .nav-link:hover,
 .add-lesson-btn:hover {
-    background-color: #29648A;
+  background-color: var(--hover-color);
+  transform: scale(1.05);
 }
 
 .enrollment-status {
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .enrollment-status.enrolled {
-    color: #28a745;
+  color: var(--success-color);
 }
 
 .enrollment-status.not-enrolled {
-    color: #dc3545;
+  color: var(--error-color);
 }
 
 .full-width-btn-container {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container a {
-    flex: 1 1 auto;
-    margin: 5px 0;
-    padding: 12px 25px;
-    background-color: #2E9CCA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s;
+  flex: 1 1 auto;
+  margin: 5px 0;
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color var(--transition-speed), transform 0.2s;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container a:hover {
-    color: #fff;
-    background-color: #2E9CCA;
+  background-color: var(--hover-color);
+  color: #fff;
+  transform: scale(1.05);
 }
 
 .btn-container {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .btn-container .btn {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .container .btn-container {
-    display: flex;
-    justify-content: flex-start;
-    margin: 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .container .btn-container .btn {
-    margin: 0;
+  margin: 0;
 }

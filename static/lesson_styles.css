@@ -1,74 +1,136 @@
+:root {
+  --primary-color: #7f5af0;
+  --secondary-color: #2cb67d;
+  --accent-color: #fca311;
+  --bg-color: #f1f5f9;
+  --text-color: #0f172a;
+  --hover-primary: #6a4ee8;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+/* ÐÐ½Ð¸Ð¼Ð°Ñ†Ð¸Ð¸ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    color: #25274D;
-}
-
-header {
-    background-color: #2E9CCA;
-    padding: 10px 0;
-    text-align: center;
-    border-radius: 0 0 10px 10px;
-}
-
-header a {
-    display: inline-block;
-    color: #fff;
-    font-size: 20px;
-    text-decoration: none;
-    padding: 15px 20px;
-    background-color: #2E9CCA;
-    border-radius: 5px;
-    width: calc(100% - 40px);
-    box-sizing: border-box;
-}
-
-header a:hover {
-    color: #fff;
-    background-color: #2E9CCA;
-}
-
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #2E9CCA;
-    font-size: 28px;
-    margin-top: 0;
-}
-
-p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #464866;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    margin: 10px 0;
-    font-size: 18px;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  animation: fadeIn 0.5s ease-out;
 }
 
 a {
-    color: #2E9CCA;
-    text-decoration: none;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: color var(--transition-speed);
 }
 
 a:hover {
-    color: #29648A;
+  color: var(--hover-primary);
+  animation: bounce 0.5s ease;
+}
+
+header {
+  background-color: var(--primary-color);
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  animation: slideIn 0.5s ease-out;
+}
+
+header a {
+  display: inline-block;
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 15px 20px;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  width: calc(100% - 40px);
+  box-sizing: border-box;
+  transition: background-color var(--transition-speed);
+}
+
+header a:hover {
+  background-color: var(--hover-primary);
+  color: #fff;
+}
+
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: var(--text-color);
+  animation: fadeIn 0.5s ease-out;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  animation: fadeIn 0.5s ease-out;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 18px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .back-link,
@@ -76,15 +138,17 @@ a:hover {
 .main-link,
 .add-lesson-btn,
 .submit-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #2E9CCA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-right: 10px;
-    text-align: center;
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-speed), transform 0.2s;
+  margin-right: 10px;
+  text-align: center;
+  font-size: 1rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .back-link:hover,
@@ -92,71 +156,80 @@ a:hover {
 .main-link:hover,
 .add-lesson-btn:hover,
 .submit-btn:hover {
-    background-color: #29648A;
+  background-color: var(--hover-primary);
+  transform: scale(1.05);
+  animation: bounce 0.5s ease;
 }
 
 .completed {
-    color: #28a745;
-    font-weight: bold;
+  color: var(--secondary-color);
+  font-weight: bold;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .not-completed {
-    color: #dc3545;
-    font-weight: bold;
+  color: var(--accent-color);
+  font-weight: bold;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container a {
-    flex: 1 1 auto;
-    margin: 5px 0;
-    padding: 12px 25px;
-    background-color: #2E9CCA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s;
+  flex: 1 1 auto;
+  margin: 5px 0;
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: background-color var(--transition-speed), transform 0.2s;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .button-container a:hover {
-    color: #fff;
-    background-color: #2E9CCA;
+  background-color: var(--hover-primary);
+  color: #fff;
+  transform: scale(1.05);
 }
 
-/* New Styles for Navigation Links */
 .nav-links {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .nav-link {
-    display: inline-block;
-    padding: 12px 25px;
-    background-color: #2E9CCA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    transition: background-color 0.3s;
-    flex: 1;
-    margin: 0 10px;
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: background-color var(--transition-speed);
+  flex: 1;
+  margin: 0 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .nav-link:hover {
-    background-color: #29648A;
+  background-color: var(--hover-primary);
 }
 
 .nav-link:first-child {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 .nav-link:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
