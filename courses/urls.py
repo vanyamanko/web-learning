@@ -19,4 +19,5 @@ urlpatterns = [
     path('tests/', views.all_tests_list, name='all_tests_list'),
     path('<int:course_id>/lessons/<int:lesson_id>/test/', views.lesson_test, name='lesson_test'),
     path('<int:course_id>/lessons/<int:lesson_id>/result/<int:next_lesson_id>/', views.lesson_result, name='lesson_result'),
+    path('course/<int:course_id>/', views.course_detail, name='course_detail'),
 ]
