@@ -53,3 +53,22 @@ def edit_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'edit_profile.html', {'form': form, 'profile': profile})
+
+@login_required
+def delete_profile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        # Удаляем профиль и пользователя
+        profile.delete()
+        request.user.delete()
+        return redirect('home')  # Перенаправление на главную страницу после удаления
+    return render(request, 'delete_profile.html', {'profile': profile})
+
+
+@login_required
+def list_enrollments(request):
+    enrollments = Enrollment.objects.filter(user=request.user).select_related('course')
+    context = {
+        'enrollments': enrollments,
+    }
+    return render(request, 'list_enrollments.html', context)
