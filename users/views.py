@@ -35,3 +35,40 @@ def logout_view(request):
 
 def home(request):
     return render(request, 'home.html')
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        associated_users = User.objects.filter(email=email)
+        if associated_users.exists():
+            for user in associated_users:
+                subject = "Password Reset Requested"
+                email_template_name = "registration/password_reset_email.txt"
+                context = {
+                    "email": user.email,
+                    "domain": request.META['HTTP_HOST'],
+                    "site_name": "Your Site Name",
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "user": user,
+                    "token": default_token_generator.make_token(user),
+                    "protocol": "http",
+                }
+                email = render_to_string(email_template_name, context)
+                send_mail(subject, email, "noreply@yourdomain.com", [user.email])
+            messages.success(request, "A message has been sent to your email.")
+        else:
+            messages.error(request, "No user is associated with this email address.")
+    return render(request, "registration/password_reset.html")
+
+def edit_profile(request):
+    profile = request.user.profile
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect('profiles:view_profile')
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, 'profiles/edit_profile.html', {'form': form, 'profile': profile})
