@@ -8,7 +8,8 @@ app_name = 'profiles'
 urlpatterns = [
     path('', views.view_profile, name='view_profile'),
     path('edit/', views.edit_profile, name='edit_profile'),
-    # Other URL patterns for the profile app
+    path('delete/', views.delete_profile, name='delete_profile'),  # URL для удаления профиля
+    path('enrollments/', views.list_enrollments, name='list_enrollments'),  # URL для просмотра записей
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
