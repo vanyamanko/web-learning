@@ -104,3 +104,18 @@ def profile_statistics(request):
 
     return render(request, 'profile_statistics.html', {'statistics': statistics})
 
+
+
+@login_required
+def course_detail(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    enrollments = Enrollment.objects.filter(course=course, user=request.user)
+    completed_lessons = TestResult.objects.filter(user=request.user, lesson__course=course, score__gte=70).count()
+    
+    context = {
+        'course': course,
+        'enrollments': enrollments,
+        'completed_lessons': completed_lessons,
+    }
+    return render(request, 'course_detail.html', context)
+
